@@ -1,0 +1,9 @@
+a {
+    cursor:pointer;
+}
+
+a:hover {
+    background-color: lightblue;
+    border-radius: 5px;
+    color:black;
+}
