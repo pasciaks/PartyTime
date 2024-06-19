@@ -20,7 +20,7 @@ export class AppComponent {
   }
 
   tempTestDeleteMeLater() {
-    this.auth.login('student', 'student').subscribe({
+    this.auth.login('planner@pasciak.com', 'planner').subscribe({
       // change username to match DB
       next: (data) => {
         console.log('Logged in:');

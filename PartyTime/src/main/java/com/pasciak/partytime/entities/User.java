@@ -8,6 +8,9 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,8 +22,9 @@ import jakarta.persistence.OneToMany;
 public class User {
 	
 	@Id
+	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@Column(name = "username")
 	private String username;
@@ -48,16 +52,31 @@ public class User {
 	@Column(name="role")	
 	private String role;
 	
+	@OneToMany(mappedBy="user")
+	@JsonIgnoreProperties({"eventInvites","user"})
+	List<Event> events;
+	
+	@OneToMany(mappedBy="user")
+	@JsonIgnoreProperties({"event","user"})
+	List<EventInvite> eventInvites;
 	
 	public User() {
 		super();
 	}
 
-	public int getId() {
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -93,8 +112,6 @@ public class User {
 		this.role = role;
 	}
 
-	
-
 	public String getFirstName() {
 		return firstName;
 	}
@@ -127,6 +144,15 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
+	
+
+	public List<EventInvite> getEventInvites() {
+		return eventInvites;
+	}
+
+	public void setEventInvites(List<EventInvite> eventInvites) {
+		this.eventInvites = eventInvites;
+	}
 
 	@Override
 	public int hashCode() {
@@ -152,6 +178,4 @@ public class User {
 				+ updatedAt + ", role=" + role + "]";
 	}
 	
-	
-
 }

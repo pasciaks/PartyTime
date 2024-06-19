@@ -3,6 +3,8 @@ package com.pasciak.partytime.entities;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.List;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -44,7 +46,7 @@ class UserTest {
 	}
 	
 	@Test
-	void test_user_entity_mapping() {
+	void test_entity_mapping() {
 		assertNotNull(user);
 		assertEquals(1, user.getId());
 		System.out.println(user.getUsername());
@@ -55,6 +57,28 @@ class UserTest {
 		System.out.println(user.getFirstName());
 		System.out.println(user.getLastName());
 		System.out.println(user.getUpdatedAt());
+	}
+	
+	@Test
+	void test_user_events_entity_mapping() {
+		assertNotNull(user);
+		assertEquals(1, user.getId());
+		System.out.println(user.getEvents().size());
+		
+		List<Event> events = user.getEvents();
+		events.forEach(event -> {
+			System.out.println(event.getLat());
+			System.out.println(event.getLng());
+			System.out.println(event.getDateTime());
+		});
+	}
+	
+	@Test
+	void test_user_has_event_invites_entity_mapping() {
+		assertNotNull(user);
+		assertEquals(1, user.getId());
+		System.out.println("User has event invites:");
+		System.out.println(user.getEventInvites().size());
 	}
 
 }

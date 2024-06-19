@@ -8,17 +8,17 @@
 		
 		<!-- <class>com.skilldistillery.lessonlocker.entities.Choice</class> -->
 
-		<class>com.skilldistillery.lessonlocker.entities.User</class>
+		<class>com.pasciak.partytime.entities.User</class>
 		
 		<!-- end entities -->
 
 		<properties>
 			<property name="jakarta.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/lldb" />
+				value="jdbc:mysql://localhost:3306/partytime" />
 			<property name="jakarta.persistence.jdbc.user"
-				value="instructor" />
+				value="planner" />
 			<property name="jakarta.persistence.jdbc.password"
-				value="instructor" />
+				value="planner" />
 			<property name="jakarta.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />
 
