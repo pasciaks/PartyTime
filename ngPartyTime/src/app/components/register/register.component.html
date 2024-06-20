@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Register</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <form name="registerForm" class="bg-light p-5 rounded">
+        <div class="form-group m-2">
+          <label for="username">Your Unique Email: &nbsp;</label>
+          <input type="text" class="form-control" id="username" [(ngModel)]="newUser.username" name="username"
+            placeholder="Choose a valid email address" required>
+        </div>
+        <div class="form-group m-2">
+          <label for="password">Your Strong Password: &nbsp;</label>
+          <input type="password" class="form-control" id="password" [(ngModel)]="newUser.password" name="password"
+            placeholder="Create a strong password" required>
+        </div>
+        <div class="form-group m-2">
+          <label for="firstName">First Name: &nbsp;</label>
+          <input type="firstName" class="form-control" id="firstName" [(ngModel)]="newUser.firstName" name="firstName"
+            placeholder="First Name" required>
+        </div>
+        <div class="form-group m-2">
+          <label for="lastName">Last Name: &nbsp;</label>
+          <input type="lastName" class="form-control" id="lastName" [(ngModel)]="newUser.lastName" name="lastName"
+            placeholder="Last Name" required>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-success" (click)="register(newUser)">Register</button>
+      </form>
+    </div>
+  </div>
+</div>

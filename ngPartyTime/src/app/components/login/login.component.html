@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Login</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <form name="loginForm" class="bg-light p-5 rounded">
+        <div class="form-group m-2">
+          <label for="username">Your Unique Email: &nbsp;</label>
+          <input class="form-control" type="text" [(ngModel)]="user.username" name="username"
+            placeholder="someone@somewhere.com" required>
+        </div>
+        <div class="form-group m-2">
+          <label for="password">Your Strong Password: &nbsp;</label>
+          <input class="form-control" type="password" [(ngModel)]="user.password" name="password" placeholder="Password"
+            required>
+        </div>
+        <hr>
+        <div class="form-groupm m-2">
+          <button class="btn btn-success" type="submit" (click)="login(user)">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

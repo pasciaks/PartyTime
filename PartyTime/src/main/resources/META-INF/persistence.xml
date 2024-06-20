@@ -9,6 +9,8 @@
 		<!-- <class>com.skilldistillery.lessonlocker.entities.Choice</class> -->
 
 		<class>com.pasciak.partytime.entities.User</class>
+		<class>com.pasciak.partytime.entities.Event</class>
+		<class>com.pasciak.partytime.entities.EventInvite</class>
 		
 		<!-- end entities -->
 
