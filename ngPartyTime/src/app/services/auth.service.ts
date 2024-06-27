@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { User } from '../models/user';
 import { Buffer } from 'buffer';
 import { Router } from '@angular/router';
+import { RegistrationError } from '../models/registration-error';
 
 @Injectable({
   providedIn: 'root',
@@ -21,9 +22,13 @@ export class AuthService {
     // Create POST request to register a new account
     return this.http.post<User>(this.url + 'register', user).pipe(
       catchError((err: any) => {
-        console.log(err);
+        console.log(err?.status);
         return throwError(
-          () => new Error('AuthService.register(): error registering user.')
+          () =>
+            new RegistrationError(
+              'AuthService.register(): error registering user.',
+              err.status
+            )
         );
       })
     );

@@ -2,12 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import { RegistrationError } from '../../models/registration-error';
+import { CommonModule } from '@angular/common';
+import { userSchema } from './validation-schema'; // Adjust the path accordingly
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as Yup from 'yup';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
@@ -15,14 +20,50 @@ export class RegisterComponent implements OnInit {
   //FIELDS
   newUser: User = new User();
 
+  errors: string[] = [];
+
   //CONSTRUCTOR
   constructor(private authService: AuthService, private router: Router) {}
 
-  //LFECYCLE HOOKS
+  //LIFECYCLE HOOKS
   ngOnInit(): void {}
 
+  register = async (form: NgForm) => {
+    this.errors = [];
+
+    // Yup validation
+    try {
+      await userSchema.validate(this.newUser, { abortEarly: false });
+      console.log('Form Submitted!', this.newUser);
+      // Handle form submission
+    } catch (err: Yup.ValidationError | any) {
+      if (err instanceof Yup.ValidationError) {
+        err.inner.forEach((error) => {
+          console.log(error.path, error.message);
+          this.errors.push(error?.path + ':' + error.message);
+        });
+      }
+      console.log('Form is invalid', this.errors);
+    }
+
+    // custom JS validation
+    if (this.newUser.username.length < 3) {
+      this.errors.push('Username must be at least 3 characters long.');
+      return;
+    }
+
+    if (form.valid) {
+      console.log('Form Submitted!', this.newUser);
+      this.registerBackEnd(this.newUser);
+      // Handle form submission
+    } else {
+      console.log('Form is invalid');
+      // alert('Form is invalid. Please fill out all fields.');
+    }
+  };
+
   //OTHER METHODS
-  register(newUser: User): void {
+  registerBackEnd(newUser: User): void {
     //console.log(newUser); //test purposes for data binding confirmation
     this.authService.register(newUser).subscribe({
       next: (user) => {
@@ -38,8 +79,14 @@ export class RegisterComponent implements OnInit {
           },
         });
       },
-      error: (error) => {
-        alert('Registration failed');
+      error: (error: RegistrationError) => {
+        if (error.statusCode === 409) {
+          alert('Username already exists. Please try a different username.');
+        } else if (error.statusCode === 400) {
+          alert('Invalid registration data. Please try again.');
+        } else {
+          alert('Registration failed : ' + JSON.stringify(error, null, 2));
+        }
         console.error('Registration failed', error);
         return;
       },

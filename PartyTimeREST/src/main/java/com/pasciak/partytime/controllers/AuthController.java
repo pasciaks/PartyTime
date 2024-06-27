@@ -26,11 +26,19 @@ public class AuthController {
 	
 	@PostMapping("register")
 	public User register(@RequestBody User user, HttpServletResponse res) {
-	  if (user == null) {
+	  if (user == null || user.getUsername() == null || user.getPassword() == null || user.getUsername().equals("") || user.getPassword().equals("")) {
 	     res.setStatus(400);
 	     return null;
 	  }
+	  
+	  User alreadyExists = authService.getUserByUsername(user.getUsername());
+		if (alreadyExists != null) {
+			res.setStatus(HttpServletResponse.SC_CONFLICT); // 409 - SC_CONFLICT
+			return null;
+		}
+		
 	  user = authService.register(user);
+	  
 	  return user;
 	}
 	 
