@@ -32,8 +32,11 @@ export class RegisterComponent implements OnInit {
     this.errors = [];
 
     // Yup validation
+
+    let result = null;
+
     try {
-      await userSchema.validate(this.newUser, { abortEarly: false });
+      result = await userSchema.validate(this.newUser, { abortEarly: false });
       console.log('Form Submitted!', this.newUser);
       // Handle form submission
     } catch (err: Yup.ValidationError | any) {
@@ -44,7 +47,10 @@ export class RegisterComponent implements OnInit {
         });
       }
       console.log('Form is invalid', this.errors);
+      return;
     }
+
+    console.log('result', result);
 
     // custom JS validation
     if (this.newUser.username.length < 3) {

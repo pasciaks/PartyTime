@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import jakarta.persistence.Column;
@@ -32,8 +34,9 @@ public class Event {
 	@Column(name="datetime")
 	private LocalDateTime dateTime;
 
-	@JoinColumn(name = "user_id")
 	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 	public List<EventInvite> getEventInvites() {
@@ -44,6 +47,7 @@ public class Event {
 		this.eventInvites = eventInvites;
 	}
 
+	@JsonIgnore
 	@OneToMany(mappedBy="event")
 	List<EventInvite> eventInvites;
 	
