@@ -122,6 +122,8 @@ public class EventController {
 
 		event.setUser(requestingUser);
 
+		event.setTitle(event.getTitle().trim());
+
 		try {
 			createdEvent = eventService.create(event);
 			response.setStatus(HttpServletResponse.SC_CREATED);

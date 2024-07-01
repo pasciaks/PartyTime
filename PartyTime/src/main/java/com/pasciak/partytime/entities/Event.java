@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,26 +17,28 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Event {
-	
+
 	@Id
-	@Column(name="id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name="lat")
+	private String title;
+
+	@Column(name = "lat")
 	private Double lat;
-	
-	@Column(name="lng")
+
+	@Column(name = "lng")
 	private Double lng;
-	
-	@Column(name="datetime")
+
+	@Column(name = "datetime")
 	private LocalDateTime dateTime;
 
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	public List<EventInvite> getEventInvites() {
 		return eventInvites;
 	}
@@ -48,9 +48,9 @@ public class Event {
 	}
 
 	@JsonIgnore
-	@OneToMany(mappedBy="event")
+	@OneToMany(mappedBy = "event")
 	List<EventInvite> eventInvites;
-	
+
 	Event() {
 		super();
 	}
@@ -87,6 +87,14 @@ public class Event {
 		this.dateTime = datetime;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -116,7 +124,5 @@ public class Event {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
-	
+
 }

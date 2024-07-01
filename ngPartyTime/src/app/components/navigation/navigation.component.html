@@ -25,7 +25,7 @@
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn() && hasRole('standard')">
-          <a class="nav-link" routerLink="/standard">Standard User</a>
+          <a class="nav-link" routerLink="/profile">Profile</a>
         </li>
       </ul>
     </div>
