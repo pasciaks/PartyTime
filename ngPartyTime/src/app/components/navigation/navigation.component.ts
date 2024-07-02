@@ -1,17 +1,29 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { EventService } from '../../services/event.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, RouterLinkActive, FormsModule],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.css',
 })
 export class NavigationComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router,
+    private eventService: EventService
+  ) {}
 
   showUserCredentials(): string {
     let storedUser = this.authService.getLoggedInUserFromLocalStorage();

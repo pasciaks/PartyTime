@@ -4,14 +4,21 @@ export class Event {
   lng?: number | null;
   title: string;
   userId: number;
-  datetime?: Date | null;
+  dateTime?: Date | null;
 
-  constructor(data: Partial<Event> = {}) {
-    this.id = data.id ?? 0;
-    this.lat = data.lat ?? null;
-    this.lng = data.lng ?? null;
-    this.title = data.title ?? 'Unknown Title Of Event';
-    this.userId = data.userId ?? 0;
-    this.datetime = data.datetime ? new Date(data.datetime) : null;
+  constructor(
+    id: number = 0,
+    lat: number | null = 0,
+    lng: number | null = 0,
+    title: string = '',
+    userId: number = 0,
+    dateTime?: Date | null
+  ) {
+    this.id = id ?? 0;
+    this.lat = lat ?? null;
+    this.lng = lng ?? null;
+    this.title = title ?? 'Unknown Title Of Event';
+    this.userId = userId ?? 0;
+    this.dateTime = dateTime ? new Date(dateTime) : null;
   }
 }
