@@ -1,5 +1,6 @@
 package com.pasciak.partytime.controllers;
 
+import java.io.IOException;
 import java.security.Principal;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -43,8 +44,15 @@ public class AuthController {
 
 		user = authService.register(user);
 
-		emailService.sendEmail(user.getUsername(), "Welcome to PartyTime!",
-				"Welcome to PartyTime, " + user.getUsername() + "!");
+		// emailService.sendEmail(user.getUsername(), "Welcome to PartyTime!",
+		// "Welcome to PartyTime, " + user.getUsername() + "!");
+
+		try {
+			emailService.sendEmailWithDesignTemplate(user.getUsername(), "Welcome to PartyTime!",
+					"Welcome to PartyTime, " + user.getUsername() + "!"); // throws
+		} catch (IOException e) {
+			System.out.println("Error sending email: " + e.getMessage());
+		}
 
 		return user;
 	}
