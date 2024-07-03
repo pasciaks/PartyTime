@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export class Event {
   id: number;
   lat?: number | null;
@@ -5,6 +7,7 @@ export class Event {
   title: string;
   userId: number;
   dateTime?: Date | null;
+  user: User | null;
 
   constructor(
     id: number = 0,
@@ -12,7 +15,8 @@ export class Event {
     lng: number | null = 0,
     title: string = '',
     userId: number = 0,
-    dateTime?: Date | null
+    dateTime?: Date | null,
+    user: User | null = null
   ) {
     this.id = id ?? 0;
     this.lat = lat ?? null;
@@ -20,5 +24,6 @@ export class Event {
     this.title = title ?? 'Unknown Title Of Event';
     this.userId = userId ?? 0;
     this.dateTime = dateTime ? new Date(dateTime) : null;
+    this.user = user ?? null;
   }
 }

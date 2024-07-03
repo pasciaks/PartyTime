@@ -30,7 +30,7 @@ export class EventService {
       .get<Event[]>(this.url + 'api/events/myevents', this.getHttpOptions())
       .pipe(
         catchError((err: any) => {
-          console.error('Error retrieving questions:', err);
+          console.error('Error retrieving :', err);
           return throwError(
             () => new Error('EventService.index(): error retrieving: ' + err)
           );

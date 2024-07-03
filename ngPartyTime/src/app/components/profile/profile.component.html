@@ -15,6 +15,8 @@
     </div>
 </div> -->
 
+<hr>
+<h1>Your created events</h1>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -28,6 +30,7 @@
                             <th>Longitude</th>
                             <th>Map Link</th>
                             <th>Date and Time</th>
+                            <th>User</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,11 +44,41 @@
                                         class="link-large">🗺</span></a>
                             </td>
                             <td>{{ event.dateTime }}</td>
+                            <td>{{ event.user?.username}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+</div>
 
+<hr>
+<h1>Your event invites</h1>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>comment</th>
+                            <th>attending</th>
+                            <th>user</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let eventInvite of eventInvites">
+                            <td>{{ eventInvite.id }}</td>
+                            <td>{{ eventInvite.comment }}</td>
+                            <td>{{ eventInvite.attending }}</td>
+                            <td>{{ eventInvite?.user?.username }}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

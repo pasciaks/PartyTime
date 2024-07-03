@@ -1,5 +1,7 @@
 package com.pasciak.partytime.services;
 
+import java.util.List;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +49,11 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public User getUserByUsername(String username) {
 		return userRepo.findByUsername(username);
+	}
+
+	@Override
+	public List<User> index() {
+		List<User> users = userRepo.findAll();
+		return users;
 	}
 }

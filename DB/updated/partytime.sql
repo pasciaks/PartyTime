@@ -39,6 +39,7 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
+
 INSERT INTO `partytime`.`user`
 (`id`,
 `username`,
@@ -51,6 +52,19 @@ INSERT INTO `partytime`.`user`
 `updated_at`)
 VALUES
 ('1', 'planner@pasciak.com', '$2a$10$MaOJ.VrpBKnaujGXrKbCQOSmHIoELU/eR3HIStEjNWGuY3m96Ke5K', '1', '2024-06-19 12:24:54', 'standard', 'Planner', 'Pasciak', '2024-06-19 12:24:54');
+
+INSERT INTO `partytime`.`user`
+(`id`,
+`username`,
+`password`,
+`enabled`,
+`created_at`,
+`role`,
+`first_name`,
+`last_name`,
+`updated_at`)
+VALUES
+('2', 'admin@pasciak.com', '$2a$10$kmbn6JtPHA4LPPRcrr2JVurkhhODodHY5gN4E8R9l0oDadw3qJeGG', '1', '2024-06-19 12:24:54', 'admin', 'Admin', 'Pasciak', '2024-06-19 12:24:54');
 
 
 -- -----------------------------------------------------
@@ -84,8 +98,8 @@ INSERT INTO `partytime`.`event`
 `datetime`)
 VALUES
 (1,
-44.0,
--1111.0,
+40.646630,
+-111.946319,
 1,
 '2024-06-19 12:44:44');
 
@@ -128,6 +142,18 @@ VALUES
 1,
 '',
 NULL);
+
+INSERT INTO `partytime`.`event_invite`
+(
+`user_id`,
+`event_id`,
+`comment`,
+`attending`)
+VALUES
+(1,
+1,
+'My comment is that I will attend!',
+1);
 
 SET SQL_MODE = '';
 DROP USER IF EXISTS planner@localhost;

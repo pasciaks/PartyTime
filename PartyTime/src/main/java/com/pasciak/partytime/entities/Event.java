@@ -34,8 +34,8 @@ public class Event {
 	@Column(name = "datetime")
 	private LocalDateTime dateTime;
 
+	// @JsonIgnore
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name = "user_id")
 	private User user;
 
