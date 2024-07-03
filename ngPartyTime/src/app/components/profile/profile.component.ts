@@ -9,11 +9,12 @@ import { FormsModule } from '@angular/forms';
 import { MapLinkPipe } from '../../pipes/map-link.pipe';
 import { EventInvite } from '../../models/event-invite';
 import { EventInviteService } from '../../services/event-invite.service';
+import { MapModule } from '../../map.module';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [EventComponent, CommonModule, FormsModule, MapLinkPipe],
+  imports: [EventComponent, CommonModule, FormsModule, MapLinkPipe, MapModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })

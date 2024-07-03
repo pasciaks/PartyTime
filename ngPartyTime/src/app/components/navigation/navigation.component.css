@@ -9,5 +9,9 @@ a:hover {
 }
 
 a.active {
-    border-bottom: 2px solid blue;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.2);
+}
+
+.tiny {
+    font-size: 0.8em !important;
 }
