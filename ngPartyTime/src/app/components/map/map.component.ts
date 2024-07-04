@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 
 // Fix for leaflet's default icon issues
-import 'leaflet/dist/images/marker-shadow.png';
-import 'leaflet/dist/images/marker-icon-2x.png';
+// import 'assets/images/marker-shadow.png';
+// import 'assets/images/marker-icon-2x.png';
 
 @Component({
   selector: 'app-map',
