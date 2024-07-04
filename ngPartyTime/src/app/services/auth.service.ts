@@ -64,6 +64,28 @@ export class AuthService {
     );
   }
 
+  upload(formData: FormData): Observable<string> {
+    // Create POST request to register a new account
+    return this.http
+      .post<string>(
+        this.url + 'api/files/uploadfiles',
+        formData,
+        this.getHttpOptions()
+      )
+      .pipe(
+        catchError((err: any) => {
+          console.log(err?.status);
+          return throwError(
+            () =>
+              new RegistrationError(
+                'AuthService.register(): error registering user.',
+                err.status
+              )
+          );
+        })
+      );
+  }
+
   logout(): void {
     localStorage.removeItem('credentials');
     localStorage.removeItem('loggedInUser');
@@ -116,5 +138,15 @@ export class AuthService {
       return null;
     }
     return JSON.parse(loggedInUser);
+  }
+
+  getHttpOptions() {
+    let options = {
+      headers: {
+        Authorization: 'Basic ' + this.getCredentials(),
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    };
+    return options;
   }
 }

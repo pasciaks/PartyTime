@@ -3,11 +3,19 @@ import { RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { HeaderComponent } from './components/header/header.component';
 import { RootComponent } from './components/root/root.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, RootComponent],
+  imports: [
+    RouterOutlet,
+    HeaderComponent,
+    RootComponent,
+    HttpClientModule,
+    FileUploadComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
