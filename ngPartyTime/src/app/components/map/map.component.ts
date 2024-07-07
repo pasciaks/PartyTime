@@ -52,8 +52,20 @@ export class MapComponent implements OnInit {
       alt: 'My Marker',
     })
       .addTo(this.map)
-      .bindPopup('You clicked the map at ' + e.latlng.toString())
+      .bindPopup(
+        `<br><br><a href='/#/geo/${
+          e.latlng.lat.toString() + '/' + e.latlng.lng.toString()
+        }'>Use This Location</a>`
+      )
       .openPopup();
+
+    // .bindPopup(
+    //   'You clicked the map at ' +
+    //     e.latlng.toString() +
+    //     `<br><br><a href='/#/geo/${
+    //       e.latlng.lat.toString() + '/' + e.latlng.lng.toString()
+    //     }'>Use This Location</a>`
+    // )
   }
 
   ngOnInit(): void {
@@ -75,13 +87,18 @@ export class MapComponent implements OnInit {
     //   shadowSize: [41, 41],
     // });
 
-    L.marker([51.5, -0.09], { icon: this.defaultIcon })
+    let lat = Number(localStorage.getItem('lat') || 0);
+    let lng = Number(localStorage.getItem('lng') || 0);
+
+    L.marker([lat, lng], { icon: this.defaultIcon })
       .addTo(map)
-      .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+      .bindPopup('Currently Selected Location')
       .openPopup();
 
     // Add a click event listener to the map
     map.on('click', this.onMapClick.bind(this));
+
+    map.flyTo([lat, lng], 13);
   }
 
   // ngOnInit(): void {

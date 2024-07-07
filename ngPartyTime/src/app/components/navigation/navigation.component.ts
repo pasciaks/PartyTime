@@ -9,11 +9,18 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { EventService } from '../../services/event.service';
 import { FormsModule } from '@angular/forms';
+import { NgbdModalComponent } from '../modal/modal-component';
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [RouterLink, CommonModule, RouterLinkActive, FormsModule],
+  imports: [
+    RouterLink,
+    CommonModule,
+    RouterLinkActive,
+    FormsModule,
+    NgbdModalComponent,
+  ],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.css',
 })

@@ -40,6 +40,8 @@ export class GeoComponent implements OnInit {
         console.log(params);
         this.lat = params.get('lat') || '';
         this.lng = params.get('lng') || '';
+        localStorage.setItem('lat', this.lat);
+        localStorage.setItem('lng', this.lng);
         this.sendLatLngToBackend();
       },
     });
