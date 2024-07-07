@@ -1,4 +1,4 @@
-<div class="file-upload">
+<div class="file-upload bg-secondary border m-2 p-2">
     <form (ngSubmit)="onSubmit()" #fileUploadForm="ngForm">
         <input type="file" (change)="onFileSelected($event)" required />
         <button type="submit" [disabled]="!selectedFile">Upload</button>

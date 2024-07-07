@@ -18,6 +18,20 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  geo(lat: string, lng: string): Observable<string> {
+    // Create POST request to register a new account
+    return this.http
+      .get<string>(this.url + `api/geo/${lat}/${lng}`, this.getHttpOptions())
+      .pipe(
+        catchError((err: any) => {
+          // console.log(err?.status);
+          return throwError(
+            () => new RegistrationError(err?.status || 'Unknown', err.status)
+          );
+        })
+      );
+  }
+
   register(user: User): Observable<User> {
     // Create POST request to register a new account
     return this.http.post<User>(this.url + 'register', user).pipe(

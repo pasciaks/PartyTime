@@ -9,6 +9,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { UsersPageComponent } from './components/users-page/users-page.component';
 import { EventsPageComponent } from './components/events-page/events-page.component';
+import { GeoComponent } from './components/geo/geo.component';
 
 export const routes: Routes = [
   { path: '', component: RootComponent },
@@ -20,5 +21,6 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'users', component: UsersPageComponent },
   { path: 'events', component: EventsPageComponent },
+  { path: 'geo/:lat/:lng', component: GeoComponent },
   { path: '**', component: NotFoundComponent },
 ];
