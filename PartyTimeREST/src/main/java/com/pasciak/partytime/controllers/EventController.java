@@ -38,6 +38,7 @@ public class EventController {
 	// TODO: Re-look to consider use of 200, 201, 204, 400, 401, 403, 404, 500
 
 	private boolean isAuthorized(Principal principal, HttpServletResponse response) {
+		System.out.println("EventController.isAuthorized()");
 		if (principal == null) { // no Authorization header sent
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401 - SC_UNAUTHORIZED
 			response.setHeader("WWW-Authenticate", "Basic");
@@ -112,7 +113,13 @@ public class EventController {
 	public Event create(@RequestBody Event event, Principal principal, HttpServletResponse response,
 			HttpServletRequest request) {
 
+		System.out.println("EventController.create()");
+		System.err.println("EventController.create()");
+		System.out.println("EventController.create()");
+		System.err.println("EventController.create()");
+
 		if (!isAuthorized(principal, response)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return null;
 		}
 
@@ -122,7 +129,22 @@ public class EventController {
 
 		event.setUser(requestingUser);
 
+		if (event.getDateTime() == null) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			return null;
+		}
+
+		if (event.getTitle() == null || event.getTitle().trim().equals("")) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			return null;
+		}
+
 		event.setTitle(event.getTitle().trim());
+
+		if (event.getLat() == null || event.getLng() == null) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			return null;
+		}
 
 		try {
 			createdEvent = eventService.create(event);

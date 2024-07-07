@@ -102,7 +102,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public List<Event> findEventsByUserId(long userId) {
-		List<Event> foundEvents = eventRepo.findEventsByUserId(userId);
+		List<Event> foundEvents = eventRepo.findEventsByUserIdOrderByIdDesc(userId);
 		return foundEvents;
 	}
 

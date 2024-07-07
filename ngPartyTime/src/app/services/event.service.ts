@@ -25,6 +25,17 @@ export class EventService {
     private authService: AuthService
   ) {}
 
+  createEvent(event: Event): Observable<Event> {
+    return this.http
+      .post<Event>(this.url + 'api/events', event, this.getHttpOptions())
+      .pipe(
+        catchError((err: any) => {
+          console.error('Error :', err);
+          return throwError(() => new Error('error : ' + err));
+        })
+      );
+  }
+
   loadEvents(): Observable<Event[]> {
     return this.http
       .get<Event[]>(this.url + 'api/events/myevents', this.getHttpOptions())

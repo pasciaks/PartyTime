@@ -13,6 +13,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
 	List<Event> findAll();
 
-	List<Event> findEventsByUserId(long userId);
+	List<Event> findEventsByUserIdOrderByIdDesc(long userId);
 
 }

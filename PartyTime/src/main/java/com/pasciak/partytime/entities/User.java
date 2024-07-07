@@ -1,7 +1,6 @@
 package com.pasciak.partytime.entities;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,7 +8,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,46 +18,46 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
-	
+
 	@Id
-	@Column(name="id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "username")
 	private String username;
 
-	@Column(name="password")
+	@Column(name = "password")
 	private String password;
 
-	@Column(name="enabled")
+	@Column(name = "enabled")
 	private Boolean enabled;
 
-	@Column(name="first_name")
+	@Column(name = "first_name")
 	private String firstName;
 
-	@Column(name="last_name")
+	@Column(name = "last_name")
 	private String lastName;
 
 	@CreationTimestamp
-	@Column(name="created_at")
+	@Column(name = "created_at")
 	private LocalDateTime createdAt;
-	
+
 	@UpdateTimestamp
-	@Column(name="updated_at")
+	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
-	
-	@Column(name="role")	
+
+	@Column(name = "role")
 	private String role;
-	
-	@OneToMany(mappedBy="user")
-	@JsonIgnoreProperties({"eventInvites","user"})
+
+	@OneToMany(mappedBy = "user")
+	@JsonIgnoreProperties({ "eventInvites", "user" })
 	List<Event> events;
-	
-	@OneToMany(mappedBy="user")
-	@JsonIgnoreProperties({"event","user"})
+
+	@OneToMany(mappedBy = "user")
+	@JsonIgnoreProperties({ "event", "user" })
 	List<EventInvite> eventInvites;
-	
+
 	public User() {
 		super();
 	}
@@ -144,8 +142,6 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
-	
-
 	public List<EventInvite> getEventInvites() {
 		return eventInvites;
 	}
@@ -177,5 +173,5 @@ public class User {
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", createdAt=" + createdAt + ", updatedAt="
 				+ updatedAt + ", role=" + role + "]";
 	}
-	
+
 }

@@ -1,8 +1,56 @@
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <p>Latitude: {{this.lat}}</p>
-            <p>Longitude: {{this.lng}}</p>
+
+    <form name="eventForm" class="bg-light p-5 rounded" (ngSubmit)="this.createEvent()" #eventForm="ngForm" novalidate>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group m-2">
+                    <label for="title">Title: &nbsp;</label>
+                    <input ngModel required type="text" class="form-control" id="title" [(ngModel)]="this.event.title"
+                        name="title" placeholder="Event Title">
+                    <div *ngIf="eventForm.submitted && !this.event.title" class="text-danger">
+                        Title is required.
+                    </div>
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group m-2">
+                    <label for="dateTime">DateTime: &nbsp;</label>
+                    <input ngModel required type="datetime-local" class="form-control" id="dateTime"
+                        [(ngModel)]="this.event.dateTime" name="dateTime" placeholder="Last Name">
+                    <div *ngIf="eventForm.submitted && !this.event.dateTime" class="text-danger">
+                        DateTime is required.
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group m-2">
+                    <label for="lat">lat: &nbsp;</label>
+                    <input ngModel required disabled type="text" class="form-control" id="lat"
+                        [(ngModel)]="this.event.lat" name="lat" placeholder="Latitude" minlength="1">
+                    <div *ngIf="eventForm.submitted && this.event.lat===0" class="text-danger">
+                        Latitude is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group m-2">
+                    <label for="lng">lng: &nbsp;</label>
+                    <input ngModel required disabled type="text" class="form-control" id="lng"
+                        [(ngModel)]="this.event.lng" name="lng" placeholder="Longitude" minlength="1">
+                    <div *ngIf="eventForm.submitted && this.event.lng===0" class="text-danger">
+                        Longitude is required.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-success" value="Create Event" />
+    </form>
+
+
 </div>

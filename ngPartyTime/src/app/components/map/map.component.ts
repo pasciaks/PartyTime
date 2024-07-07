@@ -53,7 +53,9 @@ export class MapComponent implements OnInit {
     })
       .addTo(this.map)
       .bindPopup(
-        `<br><br><a href='/#/geo/${
+        `<br><p>${
+          e.latlng.lat.toString() + '/' + e.latlng.lng.toString()
+        }</p><br><a href='/#/geo/${
           e.latlng.lat.toString() + '/' + e.latlng.lng.toString()
         }'>Use This Location</a>`
       )
@@ -92,7 +94,13 @@ export class MapComponent implements OnInit {
 
     L.marker([lat, lng], { icon: this.defaultIcon })
       .addTo(map)
-      .bindPopup('Currently Selected Location')
+      .bindPopup(
+        `<br><p>${
+          lat.toString() + '/' + lng.toString()
+        }</p><br><a href='/#/geo/${
+          lat.toString() + '/' + lng.toString()
+        }'>Use This Location</a>`
+      )
       .openPopup();
 
     // Add a click event listener to the map
