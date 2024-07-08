@@ -51,7 +51,7 @@ public class Event {
 	@OneToMany(mappedBy = "event")
 	List<EventInvite> eventInvites;
 
-	Event() {
+	public Event() {
 		super();
 	}
 

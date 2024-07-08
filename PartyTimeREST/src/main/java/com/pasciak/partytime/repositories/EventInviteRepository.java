@@ -15,4 +15,6 @@ public interface EventInviteRepository extends JpaRepository<EventInvite, Long> 
 
 	List<EventInvite> findEventInvitesByUserId(long userId);
 
+	List<EventInvite> findEventInvitesByEventId(long eventId);
+
 }

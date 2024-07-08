@@ -13,4 +13,8 @@ public interface EventInviteService {
 
 	List<EventInvite> findEventInvitesByUserId(long userId);
 
+	List<EventInvite> findEventInvitesByEventId(long eventId);
+
+	EventInvite create(long userId, long eventId);
+
 }

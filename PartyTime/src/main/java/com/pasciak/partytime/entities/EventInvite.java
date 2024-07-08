@@ -2,9 +2,6 @@ package com.pasciak.partytime.entities;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,29 +12,29 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="event_invite")
+@Table(name = "event_invite")
 public class EventInvite {
-	
+
 	@Id
-	@Column(name="id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name="comment")
+	@Column(name = "comment")
 	private String comment;
-	
-	@Column(name="attending")
+
+	@Column(name = "attending")
 	private Integer attending;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "event_id")
 	private Event event;
-	
-	EventInvite() {
+
+	public EventInvite() {
 		super();
 	}
 
@@ -64,7 +61,7 @@ public class EventInvite {
 	public void setAttending(Integer attending) {
 		this.attending = attending;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
@@ -102,5 +99,5 @@ public class EventInvite {
 	public String toString() {
 		return "EventInvite [id=" + id + ", comment=" + comment + ", attending=" + attending + "]";
 	}
-	
+
 }

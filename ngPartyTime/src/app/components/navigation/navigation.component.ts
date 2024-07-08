@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   ActivatedRoute,
   Router,
@@ -24,13 +24,17 @@ import { NgbdModalComponent } from '../modal/modal-component';
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.css',
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private router: Router,
     private eventService: EventService
   ) {}
+  ngOnInit(): void {
+    let storedUser = this.authService.getLoggedInUserFromLocalStorage();
+    console.log('Stored User: ', storedUser);
+  }
 
   showUserCredentials(): string {
     let storedUser = this.authService.getLoggedInUserFromLocalStorage();

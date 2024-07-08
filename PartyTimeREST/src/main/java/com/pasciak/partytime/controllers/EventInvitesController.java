@@ -5,9 +5,12 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.pasciak.partytime.entities.EventInvite;
 import com.pasciak.partytime.entities.User;
 import com.pasciak.partytime.services.AuthService;
@@ -96,9 +99,40 @@ public class EventInvitesController {
 			response.setStatus(HttpServletResponse.SC_OK);
 		}
 
-		List<EventInvite> events = eventInviteService.findEventInvitesByUserId(requestingUser.getId());
+		List<EventInvite> eventInvites = eventInviteService.findEventInvitesByUserId(requestingUser.getId());
 
-		return events;
+		return eventInvites;
 
 	}
+
+	@PostMapping("event-invites")
+	public EventInvite createEventInvite(@RequestBody JsonNode requestBody, Principal principal,
+			HttpServletResponse response) {
+
+		// Extract key-value pairs from the request body
+		long userId = requestBody.get("userId").asLong();
+		long eventId = requestBody.get("eventId").asLong();
+
+		System.out.println(userId);
+		System.out.println(eventId);
+
+		if (!isAuthorized(principal, response)) {
+			return null;
+		}
+
+		User requestingUser = loggedInUser(principal, response);
+
+		if (requestingUser == null) {
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return null;
+		} else {
+			response.setStatus(HttpServletResponse.SC_OK);
+		}
+
+		EventInvite createdEventInvite = eventInviteService.create(userId, eventId);
+
+		return createdEventInvite;
+
+	}
+
 }

@@ -109,16 +109,18 @@ public class EventController {
 		}
 
 		/////////////////////////////////////////////////////////////////////////////
-		// TODO: If the user is invited to the event, they should be able to see it
+		// If the user is invited to the event, they should be able to see it
 		/////////////////////////////////////////////////////////////////////////////
 
-		List<EventInvite> eventInvites = eventInviteService.findEventInvitesByUserId(id);
+		List<EventInvite> eventInvites = eventInviteService.findEventInvitesByEventId(id);
 
 		for (EventInvite ei : eventInvites) {
-			if (ei.getId() == id) {
+
+			if (ei.getEvent().getId() == id && ei.getUser().getId() == requestingUser.getId()) {
 				response.setStatus(HttpServletResponse.SC_OK);
 				return event;
 			}
+
 		}
 
 		/////////////////////////////////////////////////////////////////////////////
