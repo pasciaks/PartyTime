@@ -44,12 +44,12 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let event of events">
-                            <td>{{ event.id }}</td>
+                            <td><a href="/#/events/{{event.id}}">{{ event.id }}</a></td>
                             <td>{{ event.title }}</td>
                             <td>{{ event.lat }}</td>
                             <td>{{ event.lng }}</td>
                             <td>
-                                <a href="{{event | mapLink:'12'}}" target="_blank"><span
+                                <a href="{{event | mapLink:'12'}}" target="_blank" rel="noopener noreferrer"><span
                                         class="link-large">🗺</span></a>
                             </td>
                             <td>{{ event.dateTime }}</td>
@@ -79,11 +79,12 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let eventInvite of eventInvites">
-                            <td>{{ eventInvite.id }}</td>
+                            <td>Event ID:<a href="/#/events/{{eventInvite.event?.id }}">{{ eventInvite.event?.id }}</a>
+                            </td>
+                            <td>Invite ID:{{ eventInvite.id }}</td>
                             <td>{{ eventInvite.comment }}</td>
                             <td>{{ eventInvite.attending }}</td>
                             <td>{{ eventInvite?.user?.username }}</td>
-
                         </tr>
                     </tbody>
                 </table>

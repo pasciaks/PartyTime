@@ -1,7 +1,16 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h1>Event Page</h1>
+            <h1>Single Event Page</h1>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <section *ngIf="this.wasFound">
+            <app-event id={{this.event?.id}} title={{this.event?.title}} dateTime={{this.event?.dateTime}}
+                lat={{this.event?.lat}} lng={{this.event?.lng}} [user]="this.event?.user || null"
+                [event]="this.event"></app-event>
+        </section>
     </div>
 </div>

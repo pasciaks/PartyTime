@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { UsersPageComponent } from './components/users-page/users-page.component';
+import { EventPageComponent } from './components/event-page/event-page.component';
 import { EventsPageComponent } from './components/events-page/events-page.component';
 import { GeoComponent } from './components/geo/geo.component';
 
@@ -20,6 +21,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'users', component: UsersPageComponent },
+  { path: 'events/:eventId', component: EventPageComponent },
   { path: 'events', component: EventsPageComponent },
   { path: 'geo/:lat/:lng', component: GeoComponent },
   { path: '**', component: NotFoundComponent },

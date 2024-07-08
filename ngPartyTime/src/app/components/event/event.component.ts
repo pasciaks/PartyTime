@@ -1,29 +1,34 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { User } from '../../models/user';
+import { Event } from '../../models/event';
+import { MapLinkPipe } from '../../pipes/map-link.pipe';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-event',
   standalone: true,
-  imports: [],
+  imports: [MapLinkPipe, CommonModule],
   templateUrl: './event.component.html',
   styleUrl: './event.component.css',
 })
 export class EventComponent implements OnInit {
-  @Input() id: string = ''; // Add an initializer for the 'id' property
+  @Input() id: string = '';
   @Input() title: string = '';
-  @Input() lat: number = 0;
-  @Input() lng: number = 0;
-  @Input() datetime: string = '';
-  @Input() username: string = '';
+  @Input() lat: string = '0';
+  @Input() lng: string = '0';
+  @Input() dateTime: string = '';
+  @Input() user: User | null = null;
+  @Input() event: Event | null = null;
 
   constructor() {}
 
   ngOnInit() {
     // Initialize the properties with the input values
-    this.id = this.id || '';
-    this.title = this.title || '';
-    this.lat = this.lat || 0;
-    this.lng = this.lng || 0;
-    this.datetime = this.datetime || '';
-    this.username = this.username || '';
+    // this.id = this.id || '';
+    // this.title = this.title || '';
+    // this.lat = this.lat || '0';
+    // this.lng = this.lng || '0';
+    // this.dateTime = this.dateTime || '';
+    // this.user = this.user || null;
   }
 }

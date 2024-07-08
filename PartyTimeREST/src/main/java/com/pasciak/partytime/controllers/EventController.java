@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pasciak.partytime.entities.Event;
+import com.pasciak.partytime.entities.EventInvite;
 import com.pasciak.partytime.entities.User;
 import com.pasciak.partytime.services.AuthService;
+import com.pasciak.partytime.services.EventInviteService;
 import com.pasciak.partytime.services.EventService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,11 +30,13 @@ public class EventController {
 
 	private AuthService authService;
 	private EventService eventService;
+	private EventInviteService eventInviteService;
 
-	public EventController(AuthService authService, EventService eventService) {
+	public EventController(AuthService authService, EventService eventService, EventInviteService eventInviteService) {
 		super();
 		this.authService = authService;
 		this.eventService = eventService;
+		this.eventInviteService = eventInviteService;
 	}
 
 	// TODO: Re-look to consider use of 200, 201, 204, 400, 401, 403, 404, 500
@@ -70,7 +74,7 @@ public class EventController {
 	}
 
 	@GetMapping("events/{id}")
-	public Event show(@PathVariable("id") int id, Principal principal, HttpServletResponse response,
+	public Event show(@PathVariable("id") long id, Principal principal, HttpServletResponse response,
 			HttpServletRequest request) {
 
 		if (!isAuthorized(principal, response)) {
@@ -103,6 +107,21 @@ public class EventController {
 			response.setStatus(HttpServletResponse.SC_OK);
 			return event;
 		}
+
+		/////////////////////////////////////////////////////////////////////////////
+		// TODO: If the user is invited to the event, they should be able to see it
+		/////////////////////////////////////////////////////////////////////////////
+
+		List<EventInvite> eventInvites = eventInviteService.findEventInvitesByUserId(id);
+
+		for (EventInvite ei : eventInvites) {
+			if (ei.getId() == id) {
+				response.setStatus(HttpServletResponse.SC_OK);
+				return event;
+			}
+		}
+
+		/////////////////////////////////////////////////////////////////////////////
 
 		response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		return null;

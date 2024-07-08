@@ -61,10 +61,8 @@ export class RegisterComponent implements OnInit {
     if (form.valid) {
       console.log('Form Submitted!', this.newUser);
       this.registerBackEnd(this.newUser);
-      // Handle form submission
     } else {
       console.log('Form is invalid');
-      // alert('Form is invalid. Please fill out all fields.');
     }
   };
 

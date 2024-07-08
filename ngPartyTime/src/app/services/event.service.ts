@@ -49,6 +49,17 @@ export class EventService {
       );
   }
 
+  show(eventId: Number): Observable<Event> {
+    return this.http
+      .get<Event>(this.url + 'api/events/' + eventId, this.getHttpOptions())
+      .pipe(
+        catchError((err: any) => {
+          console.error('Error :', err);
+          return throwError(() => new Error('error : ' + err));
+        })
+      );
+  }
+
   getHttpOptions() {
     let options = {
       headers: {
