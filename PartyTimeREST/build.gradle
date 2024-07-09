@@ -23,12 +23,11 @@ repositories {
 	mavenCentral()
 }
 
-
-
-
 dependencies {
 	implementation project(':PartyTime')
 	implementation 'com.sendgrid:sendgrid-java:4.9.3'
+	implementation 'com.sparkjava:spark-core:2.9.3'
+	implementation 'com.stripe:stripe-java:23.4.0'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
