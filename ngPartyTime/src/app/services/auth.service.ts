@@ -18,6 +18,10 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  getUrl(): string {
+    return this.url;
+  }
+
   geo(lat: string, lng: string): Observable<string> {
     // Create POST request to register a new account
     return this.http

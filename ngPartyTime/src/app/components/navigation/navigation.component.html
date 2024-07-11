@@ -31,9 +31,13 @@
           <a class="nav-link" routerLink="/profile">Profile</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn()">
+          <a class="nav-link" target="_blank" rel="noopener noreferrer" [href]="getLink()">Stripe</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn()">
           <ngbd-modal-component></ngbd-modal-component>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+<p>{{showUserCredentials()}}</p>

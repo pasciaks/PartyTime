@@ -36,6 +36,16 @@ export class NavigationComponent implements OnInit {
     console.log('Stored User: ', storedUser);
   }
 
+  getLink(): string {
+    // if dev mode - http://localhost:4200/
+    let url = this.authService.getUrl();
+    if (url.includes('localhost')) {
+      return `${url}stripe.html`;
+    }
+    // if live mode -
+    return this.router.createUrlTree(['/stripe.html']).toString();
+  }
+
   showUserCredentials(): string {
     let storedUser = this.authService.getLoggedInUserFromLocalStorage();
     if (storedUser) {

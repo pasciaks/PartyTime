@@ -9,6 +9,7 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color:white;
 }
 section {
   margin:10px;
@@ -35,7 +36,8 @@ p {
   font-size: 14px;
   line-height: 20px;
   letter-spacing: -0.154px;
-  color: #242d60;
+/*   color: #242d60; */
+color:red;
   height: 100%;
   width: 100%;
   padding: 0 20px;
