@@ -5,11 +5,12 @@ import { AuthService } from '../../services/auth.service';
 import { Event } from '../../models/event';
 import { FormsModule } from '@angular/forms';
 import { EventService } from '../../services/event.service';
+import { MapModule } from '../../map.module';
 
 @Component({
   selector: 'app-geo',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MapModule],
   templateUrl: './geo.component.html',
   styleUrl: './geo.component.css',
 })
@@ -22,6 +23,13 @@ export class GeoComponent implements OnInit {
   ) {
     console.log('Constructor');
   }
+
+  onMapClick: (event: any) => void = (event) => {
+    console.log(event);
+    this.event.lat = event.lat;
+    this.event.lng = event.lng;
+    this.sendLatLngToBackend();
+  };
 
   event: Event = new Event(0, 0, 0, '', 0, null, null);
 

@@ -16,7 +16,8 @@ import { MapModule } from '../../map.module';
       ></button>
     </div>
     <div class="modal-body">
-      <app-map></app-map>
+      <!-- <app-map></app-map> -->
+      <h1>Hello, {{ name }}!</h1>
     </div>
     <div class="modal-footer">
       <button

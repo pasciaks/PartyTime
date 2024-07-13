@@ -1,5 +1,7 @@
 <div class="container">
 
+    <app-map (mapClick)="this.onMapClick($event)"></app-map>
+
     <form name="eventForm" class="bg-light p-5 rounded" (ngSubmit)="this.createEvent()" #eventForm="ngForm" novalidate>
 
         <div class="row">

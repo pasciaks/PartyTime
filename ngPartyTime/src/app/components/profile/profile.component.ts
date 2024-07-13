@@ -10,6 +10,7 @@ import { MapLinkPipe } from '../../pipes/map-link.pipe';
 import { EventInvite } from '../../models/event-invite';
 import { EventInviteService } from '../../services/event-invite.service';
 import { NgbdModalComponent } from '../modal/modal-component';
+import { MapModule } from '../../map.module';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +21,7 @@ import { NgbdModalComponent } from '../modal/modal-component';
     FormsModule,
     MapLinkPipe,
     NgbdModalComponent,
+    MapModule,
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',

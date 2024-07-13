@@ -23,6 +23,7 @@ export const routes: Routes = [
   { path: 'users', component: UsersPageComponent },
   { path: 'events/:eventId', component: EventPageComponent },
   { path: 'events', component: EventsPageComponent },
+  { path: 'geo', component: GeoComponent },
   { path: 'geo/:lat/:lng', component: GeoComponent },
   { path: '**', component: NotFoundComponent },
 ];

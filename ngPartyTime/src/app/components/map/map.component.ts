@@ -71,7 +71,7 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const map = L.map('map').setView([51.505, -0.09], 13);
+    const map = L.map('map').setView([44.505, -110.09], 1);
 
     this.map = map;
 
@@ -106,7 +106,7 @@ export class MapComponent implements OnInit {
     // Add a click event listener to the map
     map.on('click', this.onMapClick.bind(this));
 
-    map.flyTo([lat, lng], 13);
+    map.flyTo([lat, lng], 5);
   }
 
   // ngOnInit(): void {
