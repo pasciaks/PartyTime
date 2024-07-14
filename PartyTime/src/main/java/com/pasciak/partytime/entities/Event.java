@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -47,7 +47,8 @@ public class Event {
 		this.eventInvites = eventInvites;
 	}
 
-	@JsonIgnore
+//	@JsonIgnore
+	@JsonIgnoreProperties({ "event" })
 	@OneToMany(mappedBy = "event")
 	List<EventInvite> eventInvites;
 

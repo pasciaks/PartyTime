@@ -1,15 +1,42 @@
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">{{ title }}</h5>
-        <p class="card-text"><strong>ID:</strong> {{ id }}</p>
-        <p class="card-text"><strong>Title:</strong> {{ title }}</p>
-        <p class="card-text"><strong>Latitude:</strong> {{ lat }}</p>
-        <p class="card-text"><strong>Longitude:</strong> {{ lng }}</p>
-        <p *ngIf="this.event != null">
-            <a href="{{this.event | mapLink:'12'}}" target="_blank" rel="noopener noreferrer"><span
-                    class="link-large">🗺</span></a>
-        </p>
-        <p class="card-text"><strong>DateTime:</strong> {{ dateTime }}</p>
-        <p class="card-text"><strong>Event Creator:</strong> {{ this?.user?.username || '' }}</p>
+<div class="container">
+    <div class="row">
+
+        <div class="col">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ title }}</h5>
+                    <p class="card-text"><strong>ID:</strong> {{ id }}</p>
+                    <p class="card-text"><strong>Title:</strong> {{ title }}</p>
+                    <p class="card-text"><strong>Latitude:</strong> {{ lat }}</p>
+                    <p class="card-text"><strong>Longitude:</strong> {{ lng }}</p>
+                    <p *ngIf="this.event != null">
+                        <a href="{{this.event | mapLink:'12'}}" target="_blank" rel="noopener noreferrer"><span
+                                class="link-large">🗺</span></a>
+                    </p>
+                    <p class="card-text"><strong>DateTime:</strong> {{ dateTime }}</p>
+                    <p class="card-text"><strong>Event Creator:</strong> {{ this?.user?.username || '' }}</p>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+        <div class="col">
+            <!-- <p>{{this?.event?.eventInvites | json}}</p> -->
+            <ul>
+                <li *ngFor="let eventInvite of this?.event?.eventInvites">
+                    <!-- <p>{{eventInvite | json}}</p> -->
+
+                    <p>Attending: {{this.evaluate(eventInvite)}}<br>
+                        User: {{eventInvite.user?.username}}<br>
+                        Comment: {{eventInvite.comment}}</p>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

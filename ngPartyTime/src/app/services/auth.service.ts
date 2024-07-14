@@ -111,6 +111,7 @@ export class AuthService {
   }
 
   getLoggedInUser(): Observable<User> {
+    console.log('  AuthService.getLoggedInUser()');
     if (!this.checkLogin()) {
       return throwError(() => {
         new Error('Not logged in.');

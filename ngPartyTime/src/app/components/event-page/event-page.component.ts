@@ -6,11 +6,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../models/event';
-
+import { User } from '../../models/user';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms'; // Import this
+import { EventInviteService } from '../../services/event-invite.service';
+import { EventInvite } from '../../models/event-invite';
 @Component({
   selector: 'app-event-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, EventComponent],
+  imports: [CommonModule, FormsModule, EventComponent, ReactiveFormsModule],
   templateUrl: './event-page.component.html',
   styleUrl: './event-page.component.css',
 })
@@ -19,15 +23,70 @@ export class EventPageComponent implements OnInit {
   wasFound: boolean = false;
   event: Event | null = null;
 
+  loggedInUser: User | null = null;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private eventService: EventService
+    private eventService: EventService,
+    private eventInviteService: EventInviteService,
+    private fb: FormBuilder
   ) {
     console.log('Constructor');
+    this.emailForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      invalid: [false],
+    });
   }
+
+  emailForm: FormGroup;
+
+  eventInvite: EventInvite | null = null;
+
+  onSubmit() {
+    if (this.emailForm.valid) {
+      console.log('Form Submitted!', this.emailForm.value);
+
+      // post form to subscribed service to create event-invite
+
+      this.eventInviteService
+        .invite(this.emailForm.value.email, this.eventId)
+        .subscribe({
+          next: (eventInvite: EventInvite) => {
+            console.log(eventInvite);
+            this.eventInvite = eventInvite;
+            alert(
+              'User invited to event! \n\n' +
+                JSON.stringify(eventInvite, null, 2)
+            );
+          },
+          error: (err) => {
+            console.error(err);
+            console.error('Error inviting user to event.');
+            alert(
+              'Error inviting user to event. \n\n' +
+                JSON.stringify(err, null, 2)
+            );
+          },
+        });
+    }
+  }
+
   ngOnInit(): void {
+    this.loggedInUser = null;
+    console.log('.........getting user..........');
+    this.authService.getLoggedInUser().subscribe({
+      next: (user: User) => {
+        console.log(user);
+        this.loggedInUser = user;
+      },
+      error: (err) => {
+        console.error(err);
+        console.error('You are not logged in.');
+        this.router.navigateByUrl('login');
+      },
+    });
     this.activatedRoute.paramMap.subscribe({
       next: (params) => {
         console.log(params);
@@ -45,6 +104,7 @@ export class EventPageComponent implements OnInit {
         this.wasFound = true;
       },
       error: (err) => {
+        this.event = null;
         console.error(err);
         this.wasFound = false;
         console.error(

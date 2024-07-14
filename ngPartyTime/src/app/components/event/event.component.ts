@@ -3,6 +3,7 @@ import { User } from '../../models/user';
 import { Event } from '../../models/event';
 import { MapLinkPipe } from '../../pipes/map-link.pipe';
 import { CommonModule } from '@angular/common';
+import { EventInvite } from '../../models/event-invite';
 
 @Component({
   selector: 'app-event',
@@ -21,6 +22,16 @@ export class EventComponent implements OnInit {
   @Input() event: Event | null = null;
 
   constructor() {}
+
+  evaluate(eventInvite: EventInvite): string {
+    if (eventInvite.attending === 1) {
+      return 'Attending';
+    } else if (eventInvite.attending === 0) {
+      return 'Not Attending';
+    } else {
+      return 'Unknown';
+    }
+  }
 
   ngOnInit() {
     // Initialize the properties with the input values

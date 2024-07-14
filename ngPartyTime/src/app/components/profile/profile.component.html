@@ -29,94 +29,88 @@
 <div class="container">
     <div class="row">
 
+        <div class="col-4 map-col">
 
-
-        <div class="col">
             <app-map></app-map>
-        </div>
-        <div class="col">
-
-
-
-
-            <hr>
-            <h1>Your event invites</h1>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>id</th>
-                                        <th>comment</th>
-                                        <th>attending</th>
-                                        <th>user</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let eventInvite of eventInvites">
-                                        <td>Event ID:<a href="/#/events/{{eventInvite.event?.id }}">{{
-                                                eventInvite.event?.id }}</a>
-                                        </td>
-                                        <td>Invite ID:{{ eventInvite.id }}</td>
-                                        <td>{{ eventInvite.comment }}</td>
-                                        <td>{{ eventInvite.attending }}</td>
-                                        <td>{{ eventInvite?.user?.username }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col">
+        <div class="col created-col">
 
             <hr>
             <h1>Your created events</h1>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Title</th>
-                                        <th>Latitude</th>
-                                        <th>Longitude</th>
-                                        <th>Map Link</th>
-                                        <th>Date and Time</th>
-                                        <th>User</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let event of events">
-                                        <td><a href="/#/events/{{event.id}}">{{ event.id }}</a></td>
-                                        <td>{{ event.title }}</td>
-                                        <td>{{ event.lat }}</td>
-                                        <td>{{ event.lng }}</td>
-                                        <td>
-                                            <a href="{{event | mapLink:'12'}}" target="_blank"
-                                                rel="noopener noreferrer"><span class="link-large">🗺</span></a>
-                                        </td>
-                                        <td>{{ event.dateTime }}</td>
-                                        <td>{{ event.user?.username}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Latitude</th>
+                                    <th>Longitude</th>
+                                    <th>Map Link</th>
+                                    <th>Date and Time</th>
+                                    <th>User</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let event of events">
+                                    <td><a href="/#/events/{{event.id}}">{{ event.id }}</a></td>
+                                    <td>{{ event.title }}</td>
+                                    <td>{{ event.lat }}</td>
+                                    <td>{{ event.lng }}</td>
+                                    <td>
+                                        <a href="{{event | mapLink:'12'}}" target="_blank"
+                                            rel="noopener noreferrer"><span class="link-large">🗺</span></a>
+                                    </td>
+                                    <td>{{ event.dateTime }}</td>
+                                    <td>{{ event.user?.username}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+        </div>
 
+    </div>
+
+</div>
+
+
+
+
+<div class="col invited-col">
+
+    <hr>
+    <h1>Your event invites</h1>
+
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>comment</th>
+                            <th>attending</th>
+                            <th>user</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let eventInvite of eventInvites">
+                            <td>Event ID:<a href="/#/events/{{eventInvite.event?.id }}">{{
+                                    eventInvite.event?.id }}</a>
+                            </td>
+                            <td>Invite ID:{{ eventInvite.id }}</td>
+                            <td>{{ eventInvite.comment }}</td>
+                            <td>{{ eventInvite.attending }}</td>
+                            <td>{{ eventInvite?.user?.username }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

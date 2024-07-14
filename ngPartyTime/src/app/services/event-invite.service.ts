@@ -41,6 +41,24 @@ export class EventInviteService {
       );
   }
 
+  invite(email: String, eventId: Number): Observable<EventInvite> {
+    return this.http
+      .post<EventInvite>(
+        this.url + 'api/event-invites',
+        { email, eventId },
+        this.getHttpOptions()
+      )
+      .pipe(
+        catchError((err: any) => {
+          console.error('Error retrieving :', err);
+          return throwError(
+            () =>
+              new Error('EventInviteService.index(): error retrieving: ' + err)
+          );
+        })
+      );
+  }
+
   getHttpOptions() {
     let options = {
       headers: {

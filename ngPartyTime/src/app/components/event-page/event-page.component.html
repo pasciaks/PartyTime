@@ -4,13 +4,33 @@
             <h1>Single Event Page</h1>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col">
-        <section *ngIf="this.wasFound">
-            <app-event id={{this.event?.id}} title={{this.event?.title}} dateTime={{this.event?.dateTime}}
-                lat={{this.event?.lat}} lng={{this.event?.lng}} [user]="this.event?.user || null"
-                [event]="this.event"></app-event>
-        </section>
+
+    <div class="row">
+        <div class="col" *ngIf="this.wasFound">
+            <section>
+                <app-event id={{this.event?.id}} title={{this.event?.title}} dateTime={{this.event?.dateTime}}
+                    lat={{this.event?.lat}} lng={{this.event?.lng}} [user]="this.event?.user || null"
+                    [event]="this.event"></app-event>
+            </section>
+        </div>
+
+        <div class="col" *ngIf="this.wasFound">
+            <section *ngIf="this.event?.user?.id==this.loggedInUser?.id">
+                <h1>Invite users to this event</h1>
+                <!-- <p>{{this.loggedInUser|json}}</p> -->
+                <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+                    <div>
+                        <label for="email">Email Address:&nbsp; </label>
+                        <input id="email" formControlName="email" type="email">
+                        <div *ngIf="emailForm?.get('email')?.invalid && emailForm?.get('email')?.touched"></div>
+                        <small *ngIf="emailForm?.get('email')?.errors?.['required']">Email is required.</small>
+                        <small *ngIf="emailForm?.get('email')?.errors?.['email']">Invalid email address.</small>
+                    </div>
+
+                    <button class="btn btn-success" type="submit" [disabled]="emailForm.invalid">Create Invite</button>
+                </form>
+
+            </section>
+        </div>
     </div>
 </div>

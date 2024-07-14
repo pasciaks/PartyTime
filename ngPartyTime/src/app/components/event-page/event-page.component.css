@@ -1,0 +1,25 @@
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  div {
+    margin-bottom: 12px;
+  }
+  
+  input {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  small {
+    color: red;
+  }
+  
