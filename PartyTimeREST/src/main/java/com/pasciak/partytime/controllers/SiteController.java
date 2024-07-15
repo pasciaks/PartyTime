@@ -29,6 +29,8 @@ import com.stripe.model.checkout.Session;
 import com.stripe.net.Webhook;
 import com.stripe.param.PriceCreateParams;
 import com.stripe.param.checkout.SessionCreateParams;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
 
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -50,6 +52,62 @@ public class SiteController {
 
 	@Value("${stripe.webhook-signing-secret}")
 	private String stripeWebhookSigningSecret;
+
+	// twilio.test-sid
+	@Value("${twilio.test-sid}")
+	private String twilioTestSid;
+
+	// twilio.test-token
+	@Value("${twilio.test-token}")
+	private String twilioTestToken;
+
+	// twilio.test-phone
+	@Value("${twilio.test-phone}")
+	private String twilioTestPhone;
+
+	public boolean testTwilio() {
+
+		// https://github.com/twilio/twilio-java
+
+//		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+//
+//		Message message = Message.creator(new PhoneNumber(TWILIO_PHONE_NUMBER), new PhoneNumber(TWILIO_PHONE_NUMBER),
+//				"This is a test twilio text?").create();
+//
+//		System.out.println(message.getSid());
+
+		System.out.println(twilioTestSid);
+		System.out.println(twilioTestToken);
+		System.out.println(twilioTestPhone);
+
+		Twilio.init(twilioTestSid, twilioTestToken);
+
+		Message message = Message.creator(new com.twilio.type.PhoneNumber(twilioTestPhone),
+				new com.twilio.type.PhoneNumber(twilioTestPhone),
+				"This is the ship that made the Kessel Run in fourteen parsecs?").create();
+
+		System.out.println(message.getBody());
+
+		return true;
+
+	}
+
+	@PostMapping("twilio-test")
+	public ResponseEntity<String> handleTwilioTest(@RequestBody String payload, HttpServletResponse response,
+			HttpServletResponse request) {
+
+		// https://github.com/twilio/twilio-java
+
+		System.out.println("TWILIO received...");
+		System.out.println(payload);
+
+		boolean result = testTwilio();
+
+		System.out.println("Twilio test result: " + result);
+
+		return ResponseEntity.ok("Twilio test received");
+
+	}
 
 	@PostMapping("webhook")
 	public ResponseEntity<String> handleStripeEvent(@RequestBody String payload,

@@ -143,7 +143,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"username\": \"sheldon@pasciak.com\",\n        \"password\": \"sheldon\"\n    }",
+					"raw": "    {\n        \"username\": \"test2@pasciak.com\",\n        \"password\": \"test2\"\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -615,6 +615,137 @@
 					"body": "[\n    {\n        \"id\": 1,\n        \"comment\": \"\",\n        \"attending\": null,\n        \"user\": {\n            \"id\": 1,\n            \"username\": \"planner@pasciak.com\",\n            \"password\": \"$2a$10$MaOJ.VrpBKnaujGXrKbCQOSmHIoELU/eR3HIStEjNWGuY3m96Ke5K\",\n            \"enabled\": true,\n            \"firstName\": \"Planner\",\n            \"lastName\": \"Pasciak\",\n            \"createdAt\": \"2024-06-19T12:24:54\",\n            \"updatedAt\": \"2024-06-19T12:24:54\",\n            \"role\": \"standard\",\n            \"events\": [\n                {\n                    \"id\": 1,\n                    \"title\": \"Unknown Title Of Event\",\n                    \"lat\": 40.64663,\n                    \"lng\": -111.946319,\n                    \"dateTime\": \"2024-06-19T12:44:44\"\n                }\n            ],\n            \"eventInvites\": [\n                {\n                    \"id\": 1,\n                    \"comment\": \"\",\n                    \"attending\": null\n                }\n            ]\n        },\n        \"event\": {\n            \"id\": 1,\n            \"title\": \"Unknown Title Of Event\",\n            \"lat\": 40.64663,\n            \"lng\": -111.946319,\n            \"dateTime\": \"2024-06-19T12:44:44\",\n            \"user\": {\n                \"id\": 1,\n                \"username\": \"planner@pasciak.com\",\n                \"password\": \"$2a$10$MaOJ.VrpBKnaujGXrKbCQOSmHIoELU/eR3HIStEjNWGuY3m96Ke5K\",\n                \"enabled\": true,\n                \"firstName\": \"Planner\",\n                \"lastName\": \"Pasciak\",\n                \"createdAt\": \"2024-06-19T12:24:54\",\n                \"updatedAt\": \"2024-06-19T12:24:54\",\n                \"role\": \"standard\",\n                \"events\": [\n                    {\n                        \"id\": 1,\n                        \"title\": \"Unknown Title Of Event\",\n                        \"lat\": 40.64663,\n                        \"lng\": -111.946319,\n                        \"dateTime\": \"2024-06-19T12:44:44\"\n                    }\n                ],\n                \"eventInvites\": [\n                    {\n                        \"id\": 1,\n                        \"comment\": \"\",\n                        \"attending\": null\n                    }\n                ]\n            }\n        }\n    }\n]"
 				}
 			]
+		},
+		{
+			"name": "create event invite",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin@pasciak.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": 2,\n    \"eventId\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/api/event-invites",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"event-invites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create invite with email",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "planner",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "planner@pasciak.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"test2@pasciak.com\",\n    \"eventId\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/api/event-invites",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"event-invites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "twilio-test",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "planner",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "planner@pasciak.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone\": \"+13866755721\",\n    \"message\": \"This is the text message!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/twilio-test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"twilio-test"
+					]
+				}
+			},
+			"response": []
 		},
 		{
 			"name": "My events",
@@ -1392,6 +1523,103 @@
 					"body": "{\n    \"id\": 2,\n    \"lat\": 44,\n    \"lng\": -1111,\n    \"dateTime\": \"2024-06-29T12:44:44\"\n}"
 				}
 			]
+		},
+		{
+			"name": "upload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/sheldonpasciak/Desktop/pt-erd.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8088/api/files/uploadfiles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"files",
+						"uploadfiles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload image private",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/sheldonpasciak/SD/Java/PartyTime/DB/updated/pt-erd.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8088/api/files/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"files",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get image private",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/sheldonpasciak/SD/Java/PartyTime/DB/updated/pt-erd.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8088/api/files/images/pt-erd.png",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"files",
+						"images",
+						"pt-erd.png"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
