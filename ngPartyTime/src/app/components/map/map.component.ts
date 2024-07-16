@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import { Input, Output, EventEmitter } from '@angular/core';
 
 // Fix for leaflet's default icon issues
 // import 'assets/images/marker-shadow.png';
@@ -11,8 +12,18 @@ import * as L from 'leaflet';
   styleUrls: ['./map.component.css'],
 })
 export class MapComponent implements OnInit {
-  constructor() {}
-
+  constructor() {
+    this.action = () => {};
+  }
+  @Input() action: (data: any) => void;
+  @Output() eventEmitter = new EventEmitter<any>();
+  handleClick(data: any) {
+    const eventData = { message: 'Button clicked!', ...data };
+    if (this.action) {
+      this.action(eventData);
+    }
+    this.eventEmitter.emit(eventData);
+  }
   defaultIcon = L.icon({
     iconUrl: 'assets/images/marker-icon.png',
     shadowUrl: 'assets/images/marker-shadow.png',
@@ -43,6 +54,11 @@ export class MapComponent implements OnInit {
       shadowSize: [41, 41], // Size of the shadow
     });
 
+    this.handleClick(e);
+
+    localStorage.setItem('lat', e.latlng.lat.toString());
+    localStorage.setItem('lng', e.latlng.lng.toString());
+
     // Add a marker with the custom icon at the clicked location
     L.marker(e.latlng, {
       icon: customIcon,
@@ -58,8 +74,8 @@ export class MapComponent implements OnInit {
         }</p><br><a href='/#/geo/${
           e.latlng.lat.toString() + '/' + e.latlng.lng.toString()
         }'>Use This Location</a>`
-      )
-      .openPopup();
+      );
+    // .openPopup();
 
     // .bindPopup(
     //   'You clicked the map at ' +
@@ -100,13 +116,13 @@ export class MapComponent implements OnInit {
         }</p><br><a href='/#/geo/${
           lat.toString() + '/' + lng.toString()
         }'>Use This Location</a>`
-      )
-      .openPopup();
+      );
+    //   .openPopup();
 
     // Add a click event listener to the map
     map.on('click', this.onMapClick.bind(this));
 
-    map.flyTo([lat, lng], 5);
+    map.flyTo([lat, lng], 13);
   }
 
   // ngOnInit(): void {

@@ -84,8 +84,8 @@ export class GeoComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe({
       next: (params) => {
         console.log(params);
-        this.lat = params.get('lat') || '';
-        this.lng = params.get('lng') || '';
+        this.lat = params.get('lat') || localStorage.getItem('lat') || '';
+        this.lng = params.get('lng') || localStorage.getItem('lng') || '';
         localStorage.setItem('lat', this.lat);
         localStorage.setItem('lng', this.lng);
         this.event.lat = Number(this.lat);

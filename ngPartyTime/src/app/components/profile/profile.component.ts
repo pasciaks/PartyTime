@@ -35,6 +35,14 @@ export class ProfileComponent implements OnInit {
     private eventInviteService: EventInviteService
   ) {}
 
+  handleAction(data: any) {
+    console.log('Action called with data:', data);
+  }
+
+  handleEvent(event: any) {
+    console.log('Event emitted with data:', event);
+  }
+
   events: Event[] = [];
 
   eventInvites: EventInvite[] = [];

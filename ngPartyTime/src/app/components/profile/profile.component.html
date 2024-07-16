@@ -31,7 +31,7 @@
 
         <div class="col-4 map-col">
 
-            <app-map></app-map>
+            <app-map [action]="handleAction" (eventEmitter)="handleEvent($event)"></app-map>
 
         </div>
         <div class="col created-col">

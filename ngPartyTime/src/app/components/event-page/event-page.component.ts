@@ -102,6 +102,8 @@ export class EventPageComponent implements OnInit {
         console.log(event);
         this.event = event;
         this.wasFound = true;
+        localStorage.setItem('lat', this.event?.lat?.toString() || '0');
+        localStorage.setItem('lng', this.event?.lng?.toString() || '0');
       },
       error: (err) => {
         this.event = null;

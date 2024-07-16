@@ -1,8 +1,8 @@
+<app-map [action]="handleAction" (eventEmitter)="handleEvent($event)"></app-map>
+
 <div class="container">
     <div class="row">
-
         <div class="col">
-
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{{ title }}</h5>
@@ -17,26 +17,19 @@
                     <p class="card-text"><strong>DateTime:</strong> {{ dateTime }}</p>
                     <p class="card-text"><strong>Event Creator:</strong> {{ this?.user?.username || '' }}</p>
                 </div>
+                <!-- <app-map [action]="handleAction" (eventEmitter)="handleEvent($event)"></app-map>
+            </div> -->
             </div>
-
-        </div>
-
-
-
-
-
-
-        <div class="col">
-            <!-- <p>{{this?.event?.eventInvites | json}}</p> -->
-            <ul>
-                <li *ngFor="let eventInvite of this?.event?.eventInvites">
-                    <!-- <p>{{eventInvite | json}}</p> -->
-
-                    <p>Attending: {{this.evaluate(eventInvite)}}<br>
-                        User: {{eventInvite.user?.username}}<br>
-                        Comment: {{eventInvite.comment}}</p>
-                </li>
-            </ul>
+            <div class="col">
+                <!-- <p>{{this?.event?.eventInvites | json}}</p> -->
+                <ul>
+                    <li *ngFor="let eventInvite of this?.event?.eventInvites">
+                        <!-- <p>{{eventInvite | json}}</p> -->
+                        <p>Attending: {{this.evaluate(eventInvite)}}<br>
+                            User: {{eventInvite.user?.username}}<br>
+                            Comment: {{eventInvite.comment}}</p>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>

@@ -37,14 +37,16 @@
           <a class="nav-link" target="_blank" rel="noopener noreferrer" [href]="getLink()">Stripe</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn()">
-          <ngbd-modal-component></ngbd-modal-component>
+          <a class="nav-link">
+            <ngbd-modal-component></ngbd-modal-component>
+          </a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn()">
-          <a class="nav-link" routerLink="/geo">?</a>
+          <a class="nav-link" routerLink="/geo">Create Event</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn()">
           <a class="nav-link" target="_blank" rel="noopener noreferrer"
-            href="https://smartsign.smartsigntechnology.com/">+</a>
+            href="https://smartsign.smartsigntechnology.com/">Smart Sign</a>
         </li>
       </ul>
     </div>

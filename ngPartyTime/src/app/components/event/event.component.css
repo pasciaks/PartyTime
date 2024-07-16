@@ -19,3 +19,7 @@
   .link-large {
     font-size: 72px;
   }
+
+  app-map {
+    width: 300px;
+  }

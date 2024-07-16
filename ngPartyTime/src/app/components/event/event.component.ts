@@ -4,14 +4,17 @@ import { Event } from '../../models/event';
 import { MapLinkPipe } from '../../pipes/map-link.pipe';
 import { CommonModule } from '@angular/common';
 import { EventInvite } from '../../models/event-invite';
-
+import { MapModule } from '../../map.module';
+import { Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-event',
   standalone: true,
-  imports: [MapLinkPipe, CommonModule],
+  imports: [MapLinkPipe, CommonModule, MapModule],
   templateUrl: './event.component.html',
   styleUrl: './event.component.css',
 })
+
+// lessons learned, use multiple components to build a page
 export class EventComponent implements OnInit {
   @Input() id: string = '';
   @Input() title: string = '';
@@ -20,6 +23,24 @@ export class EventComponent implements OnInit {
   @Input() dateTime: string = '';
   @Input() user: User | null = null;
   @Input() event: Event | null = null;
+
+  isEditing: boolean = false;
+
+  handleAction(data: any) {
+    console.log('!!!Action called with data:', data);
+    if (this.isEditing) {
+      this.lat = data.latlng.lat;
+      this.lng = data.latlng.lng;
+    }
+  }
+
+  handleEvent(data: any) {
+    console.log('!!!Event emitted with data:', data);
+    if (this.isEditing) {
+      this.lat = data.latlng.lat;
+      this.lng = data.latlng.lng;
+    }
+  }
 
   constructor() {}
 
