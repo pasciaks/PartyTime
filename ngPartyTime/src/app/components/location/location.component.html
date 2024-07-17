@@ -1,0 +1,7 @@
+<div *ngIf="latitude !== null && longitude !== null">
+    <p>Latitude: {{ latitude }}</p>
+    <p>Longitude: {{ longitude }}</p>
+</div>
+<div *ngIf="error">
+    <p>Error: {{ error }}</p>
+</div>

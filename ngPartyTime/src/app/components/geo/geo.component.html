@@ -1,6 +1,19 @@
 <div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p>Current Geo Location</p>
+                <button class="btn btn-primary" (click)="this.navToCurrentLocation()">Get Location</button>
+                <p>{{error}}</p>
+                <app-location></app-location>
+            </div>
+            <div class="col">
+                <ngbd-modal-component></ngbd-modal-component>
+            </div>
+        </div>
+    </div>
 
-    <app-map (mapClick)="this.onMapClick($event)"></app-map>
+    <app-map lat="this.lat" lng="this.lng" (mapClick)="this.onMapClick($event)"></app-map>
 
     <form name="eventForm" class="bg-light p-5 rounded" (ngSubmit)="this.createEvent()" #eventForm="ngForm" novalidate>
 

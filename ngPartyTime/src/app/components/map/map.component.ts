@@ -115,7 +115,7 @@ export class MapComponent implements OnInit {
           lat.toString() + '/' + lng.toString()
         }</p><br><a href='/#/geo/${
           lat.toString() + '/' + lng.toString()
-        }'>Use This Location</a>`
+        }'>Open Page to Create a New Event Here</a>`
       );
     //   .openPopup();
 

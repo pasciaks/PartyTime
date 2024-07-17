@@ -6,11 +6,19 @@ import { Event } from '../../models/event';
 import { FormsModule } from '@angular/forms';
 import { EventService } from '../../services/event.service';
 import { MapModule } from '../../map.module';
-
+import { LocationComponent } from '../../components/location/location.component'; //'../.././location/location.component';
+import { GeolocationService } from '../../services/geolocation.service';
+import { NgbdModalComponent } from '../modal/modal-component';
 @Component({
   selector: 'app-geo',
   standalone: true,
-  imports: [CommonModule, FormsModule, MapModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MapModule,
+    LocationComponent,
+    NgbdModalComponent,
+  ],
   templateUrl: './geo.component.html',
   styleUrl: './geo.component.css',
 })
@@ -19,7 +27,8 @@ export class GeoComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private eventService: EventService
+    private eventService: EventService,
+    private geolocationService: GeolocationService
   ) {
     console.log('Constructor');
   }
@@ -32,6 +41,8 @@ export class GeoComponent implements OnInit {
   };
 
   event: Event = new Event(0, 0, 0, '', 0, null, null);
+
+  error: string = '';
 
   lat: string = '';
 
@@ -78,6 +89,22 @@ export class GeoComponent implements OnInit {
         // console.error(err);
       },
     });
+  };
+
+  navToCurrentLocation: () => void = () => {
+    this.geolocationService
+      .getCurrentPosition()
+      .then((position) => {
+        this.lat = position.coords.latitude.toString();
+        this.lng = position.coords.longitude.toString();
+        localStorage.setItem('lat', this.lat);
+        localStorage.setItem('lng', this.lng);
+        this.sendLatLngToBackend();
+        window.location.reload();
+      })
+      .catch((err) => {
+        this.error = err.message;
+      });
   };
 
   ngOnInit(): void {

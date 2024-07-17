@@ -44,8 +44,9 @@ export class NgbdModalContent {
 export class NgbdModalComponent {
   private modalService = inject(NgbModal);
 
-  open() {
+  open(): void {
     const modalRef = this.modalService.open(NgbdModalContent);
-    modalRef.componentInstance.name = 'World';
+    modalRef.componentInstance.name =
+      ' World ' + new Date().toLocaleDateString();
   }
 }

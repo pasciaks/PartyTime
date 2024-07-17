@@ -60,6 +60,7 @@ export class EventPageComponent implements OnInit {
               'User invited to event! \n\n' +
                 JSON.stringify(eventInvite, null, 2)
             );
+            window.location.reload();
           },
           error: (err) => {
             console.error(err);
