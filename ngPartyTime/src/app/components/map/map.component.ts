@@ -71,7 +71,7 @@ export class MapComponent implements OnInit {
       .bindPopup(
         `<br><p>${
           e.latlng.lat.toString() + '/' + e.latlng.lng.toString()
-        }</p><br><a href='/#/geo/${
+        }</p><br><a href='#/geo/${
           e.latlng.lat.toString() + '/' + e.latlng.lng.toString()
         }'>Use This Location</a>`
       );
@@ -80,7 +80,7 @@ export class MapComponent implements OnInit {
     // .bindPopup(
     //   'You clicked the map at ' +
     //     e.latlng.toString() +
-    //     `<br><br><a href='/#/geo/${
+    //     `<br><br><a href='#/geo/${
     //       e.latlng.lat.toString() + '/' + e.latlng.lng.toString()
     //     }'>Use This Location</a>`
     // )
@@ -113,7 +113,7 @@ export class MapComponent implements OnInit {
       .bindPopup(
         `<br><p>${
           lat.toString() + '/' + lng.toString()
-        }</p><br><a href='/#/geo/${
+        }</p><br><a href='#/geo/${
           lat.toString() + '/' + lng.toString()
         }'>Open Page to Create a New Event Here</a>`
       );

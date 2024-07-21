@@ -42,8 +42,9 @@ export class NavigationComponent implements OnInit {
     if (url.includes('localhost')) {
       return `${url}stripe.html`;
     }
+    return `${'https://sd.lostwords.org/PartyTimeREST/'}stripe.html`;
     // if live mode -
-    return this.router.createUrlTree(['/stripe.html']).toString();
+    return this.router.createUrlTree(['stripe.html']).toString();
   }
 
   showUserCredentials(): string {

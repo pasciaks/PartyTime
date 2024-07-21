@@ -56,7 +56,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let event of events">
-                                    <td><a href="/#/events/{{event.id}}">{{ event.id }}</a></td>
+                                    <td><a href="#/events/{{event.id}}">{{ event.id }}</a></td>
                                     <td>{{ event.title }}</td>
                                     <td>{{ event.lat }}</td>
                                     <td>{{ event.lng }}</td>
@@ -100,7 +100,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let eventInvite of eventInvites">
-                            <td>Event ID:<a href="/#/events/{{eventInvite.event?.id }}">{{
+                            <td>Event ID:<a href="#/events/{{eventInvite.event?.id }}">{{
                                     eventInvite.event?.id }}</a>
                             </td>
                             <td>Invite ID:{{ eventInvite.id }}</td>
