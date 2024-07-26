@@ -18,10 +18,19 @@
 </head>
 <body>
 	<section>
+	<p>Payment Successful! &nbsp; Account: <span id="accountDataId"></span></p>
 		<p>
 			We appreciate your business! If you have any questions, please email
 			us. <a href="mailto:orders@example.com">orders@example.com</a>.
 		</p>
 	</section>
+		<script>
+		document.addEventListener('DOMContentLoaded', function() {
+		
+			let accountDataId = localStorage.getItem('accountDataId');
+			document.getElementById('accountDataId').textContent = accountDataId;
+			
+		});
+	</script>
 </body>
 </html>

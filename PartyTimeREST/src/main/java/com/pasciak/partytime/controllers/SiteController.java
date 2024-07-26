@@ -5,6 +5,9 @@ import static spark.Spark.port;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -296,11 +300,63 @@ public class SiteController {
 	}
 
 	private void handleCheckoutSessionCompleted(JsonNode jsonNode) {
+//		JsonNode sessionNode = jsonNode.get("data").get("object");
+//
+//		System.out.println(sessionNode);
+//
+//		String sessionId = sessionNode.get("id").asText();
+//		int amountTotal = sessionNode.get("amount_total").asInt();
+//		String customerEmail = sessionNode.get("customer_details").get("email").asText();
+//
+//		System.out.println("Session ID: " + sessionId);
+//		System.out.println("Amount Total: " + amountTotal);
+//		System.out.println("Customer Email: " + customerEmail);
+//
+//		User user = authService.getUserByUsername(customerEmail);
+//
+//		if (user != null) {
+//			BigDecimal amount = new BigDecimal(amountTotal).divide(new BigDecimal(100));
+//			String formattedAmount = String.format("%.2f", amount);
+//			System.out.println(user.getUsername() + " " + "Payment Confirmation" + "Thank you for your payment of $"
+//					+ formattedAmount + "!");
+//			emailService.sendEmail(user.getUsername(), "Payment Confirmation",
+//					"Thank you for your payment of $" + formattedAmount + "!");
+//		} else {
+//			System.out.println("User not found: " + customerEmail);
+//		}
+
+		// ----------------------------------------------------------
+
+		// Assuming jsonNode is the root node of your webhook payload
 		JsonNode sessionNode = jsonNode.get("data").get("object");
+
+		System.out.println(sessionNode);
 
 		String sessionId = sessionNode.get("id").asText();
 		int amountTotal = sessionNode.get("amount_total").asInt();
 		String customerEmail = sessionNode.get("customer_details").get("email").asText();
+
+		JsonNode metadataNode = sessionNode.get("metadata");
+
+		if (metadataNode != null && metadataNode.isObject()) {
+			Iterator<Map.Entry<String, JsonNode>> fields = metadataNode.fields();
+			while (fields.hasNext()) {
+				Map.Entry<String, JsonNode> entry = fields.next();
+				String key = entry.getKey();
+				String value = entry.getValue().asText();
+				System.out.println("Metadata - " + key + ": " + value);
+
+				// You can use the metadata values as needed
+				if ("customerId".equals(key)) {
+					String customerId = value;
+					System.out.println("Customer ID: " + customerId);
+				}
+				if ("orderId".equals(key)) {
+					String orderId = value;
+					System.out.println("Order ID: " + orderId);
+				}
+			}
+		}
 
 		System.out.println("Session ID: " + sessionId);
 		System.out.println("Amount Total: " + amountTotal);
@@ -324,12 +380,15 @@ public class SiteController {
 	}
 
 	@PostMapping("create-checkout-session/{amount}")
-	public void payment(@PathVariable("amount") long amount, Principal principal, HttpServletResponse request,
+	public void payment(@PathVariable("amount") long amount, @RequestParam("accountDataId") String accountDataId,
+			@RequestParam("orderDataId") String orderDataId, Principal principal, HttpServletResponse request,
 			HttpServletResponse response) throws StripeException, IOException {
 
 		port(8088);
 
 		Stripe.apiKey = stripeTestKey;
+
+		System.out.println("Account Data ID: " + accountDataId);
 
 		PriceCreateParams params2 = PriceCreateParams.builder().setCurrency("usd").setUnitAmount(amount)
 				.setProductData(PriceCreateParams.ProductData.builder().setName("Gold Plan One Time Payment").build())
@@ -337,17 +396,42 @@ public class SiteController {
 
 		Price price = Price.create(params2);
 
-		// staticFiles.externalLocation(Paths.get("public").toAbsolutePath().toString());
-
 		String YOUR_DOMAIN = stripeDomainConfig;
+
+		Map<String, String> metadata = new HashMap<>();
+		metadata.put("accountDataId", accountDataId);
+		metadata.put("orderDataId", orderDataId);
+
 		SessionCreateParams params = SessionCreateParams.builder().setMode(SessionCreateParams.Mode.PAYMENT)
 				.setSuccessUrl(YOUR_DOMAIN + "/success.html").setCancelUrl(YOUR_DOMAIN + "/cancel.html")
 				.addLineItem(SessionCreateParams.LineItem.builder().setQuantity(1L).setPrice(price.getId()).build())
+				.putAllMetadata(metadata) // Add metadata here
 				.build();
+
 		Session session = Session.create(params);
 
-		// redirect to the checkout page
+		System.out.println(session.getUrl());
+
+		// Redirect to the checkout page
 		response.sendRedirect(session.getUrl());
+
+//		Stripe.apiKey = stripeTestKey;
+//
+//		PriceCreateParams params2 = PriceCreateParams.builder().setCurrency("usd").setUnitAmount(amount)
+//				.setProductData(PriceCreateParams.ProductData.builder().setName("Gold Plan One Time Payment").build())
+//				.build();
+//
+//		Price price = Price.create(params2);
+//
+//		String YOUR_DOMAIN = stripeDomainConfig;
+//
+//		SessionCreateParams params = SessionCreateParams.builder().setMode(SessionCreateParams.Mode.PAYMENT)
+//				.setSuccessUrl(YOUR_DOMAIN + "/success.html").setCancelUrl(YOUR_DOMAIN + "/cancel.html")
+//				.addLineItem(SessionCreateParams.LineItem.builder().setQuantity(1L).setPrice(price.getId()).build())
+//				.build();
+//		Session session = Session.create(params);
+//
+//		response.sendRedirect(session.getUrl());
 
 	}
 

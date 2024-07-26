@@ -31,6 +31,10 @@
 		</form> -->
 		<form id="checkout-form" action="create-checkout-session/0"
 			method="POST">
+			<label for="accountDataId">Account Data Id:
+			<input type="text" name="accountDataId" id="accountDataId" value="" />
+			</label>
+			<input type="hidden" name="orderDataId" id="orderDataId" value="3.141592657538" />
 			<p>Payment Amount</p>
 			<select id="price-select" class="form-control">
 				<option value="0">$0.00</option>
@@ -52,6 +56,11 @@
 				const selectedPrice = priceSelect.value;
 				form.action = `create-checkout-session/${selectedPrice}`;
 			});
+			
+			localStorage.setItem('accountDataId', '8675309');
+            let accountDataId = localStorage.getItem('accountDataId');
+            document.getElementById('accountDataId').value = accountDataId;
+			
 		});
 	</script>
 </body>
