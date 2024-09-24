@@ -14,6 +14,7 @@ export class AuthService {
   // Set port number to server's port
   // private baseUrl = 'http://localhost:8088/';
   private baseUrl = environment.baseUrl;
+  private uploadPath = environment.uploadPostPath;
   private url = this.baseUrl;
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -83,10 +84,10 @@ export class AuthService {
   }
 
   upload(formData: FormData): Observable<string> {
-    // Create POST request to register a new account
+    // Create POST request to register a new account   // api/files/uploadfiles (live server) api/files/upload (local dev server)
     return this.http
       .post<string>(
-        this.url + 'api/files/uploadfiles',
+        this.url + this.uploadPath, // 'api/files/upload'
         formData,
         this.getHttpOptions()
       )

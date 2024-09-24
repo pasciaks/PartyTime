@@ -42,6 +42,8 @@ public class FileUploadController {
 			String fileName = file.getOriginalFilename();
 			Path targetPath = uploadPath.resolve(fileName);
 
+			String messageAdd = "File uploaded successfully";
+
 			// NOTE: Test case for now, only if file name = pt-erd.png
 			// NOTE: Then if target path exists, remove the file
 			if (file.getOriginalFilename().equals("pt-erd.png")) {
@@ -50,10 +52,20 @@ public class FileUploadController {
 				}
 			}
 
-			// Copy the file to the target location
-			Files.copy(file.getInputStream(), targetPath);
+			if (Files.exists(targetPath)) {
+				// already exists
+				System.out.println("File already exists: " + fileName);
+				messageAdd = "File already exists";
+			} else {
+				// Copy the file to the target location
+				Files.copy(file.getInputStream(), targetPath);
+			}
 
-			return ResponseEntity.ok("File uploaded successfully: " + fileName);
+			// Copy the file to the target location
+
+			// Files.copy(file.getInputStream(), targetPath);
+
+			return ResponseEntity.ok("File uploaded successfully: " + fileName + " - " + messageAdd);
 		} catch (
 
 		IOException e) {

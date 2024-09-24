@@ -46,10 +46,21 @@ public class FileUploadControllerVersionTwo {
 			String fileName = file.getOriginalFilename();
 			Path targetPath = uploadPath.resolve(fileName);
 
-			// Copy the file to the target location
-			Files.copy(file.getInputStream(), targetPath);
+			String messageAdd = "File uploaded successfully";
 
-			return ResponseEntity.ok("File uploaded successfully: " + fileName);
+			if (Files.exists(targetPath)) {
+				// already exists
+				System.out.println("File already exists: " + fileName);
+				messageAdd = "File already exists";
+			} else {
+				// Copy the file to the target location
+				Files.copy(file.getInputStream(), targetPath);
+			}
+
+			// Copy the file to the target location
+			// Files.copy(file.getInputStream(), targetPath);
+
+			return ResponseEntity.ok("File uploaded successfully: " + fileName + " - " + messageAdd);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return ResponseEntity.status(500).body("Failed to upload file.");
