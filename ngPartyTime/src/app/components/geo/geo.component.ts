@@ -103,7 +103,10 @@ export class GeoComponent implements OnInit {
         window.location.reload();
       })
       .catch((err) => {
+        alert('error getting location, please enable location services');
         this.error = err.message;
+        this.sendLatLngToBackend();
+        window.location.reload();
       });
   };
 

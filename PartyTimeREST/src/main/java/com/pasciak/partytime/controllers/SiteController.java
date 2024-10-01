@@ -391,7 +391,7 @@ public class SiteController {
 		System.out.println("Account Data ID: " + accountDataId);
 
 		PriceCreateParams params2 = PriceCreateParams.builder().setCurrency("usd").setUnitAmount(amount)
-				.setProductData(PriceCreateParams.ProductData.builder().setName("Gold Plan One Time Payment").build())
+				.setProductData(PriceCreateParams.ProductData.builder().setName("Gold Plan # " + accountDataId).build())
 				.build();
 
 		Price price = Price.create(params2);

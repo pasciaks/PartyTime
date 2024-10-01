@@ -40,11 +40,11 @@ export class NavigationComponent implements OnInit {
     // if dev mode - http://localhost:4200/
     let url = this.authService.getUrl();
     if (url.includes('localhost')) {
-      return `${url}stripe.html`;
+      return `${url}checkout.html`;
     }
-    return `${'https://sd.lostwords.org/PartyTimeREST/'}stripe.html`;
+    return `${'https://sd.lostwords.org/PartyTimeREST/'}checkout.html`;
     // if live mode -
-    return this.router.createUrlTree(['stripe.html']).toString();
+    return this.router.createUrlTree(['checkout.html']).toString();
   }
 
   showUserCredentials(): string {
